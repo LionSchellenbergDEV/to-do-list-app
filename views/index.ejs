@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.min.css">
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <title>To-Do-List-App</title>
+</head>
+<body>
+    <nav>
+        <strong>To-Do-List-App</strong>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/history">History</a></li>
+        </ul>
+    </nav>
+<main>
+    <div id="create-task-wrapper">
+        <h4>Create Task</h4>
+        <form action="/create-task" method="post">
+            <input type="text" class="form-control" name="title" id="title" placeholder="Title"  aria-describedby="addon-wrapping">
+            <textarea type="text" class="form-control" name="description" id="description" placeholder="Description" rows="4" aria-describedby="addon-wrapping"></textarea>
+            <input type="datetime-local" name="deadline" id="deadline">
+            <input type="submit" class="btn btn-primary" value="Create Task">
+        </form>
+    </div>
+    <div id="open-tasks-wrapper">
+        <h4 class="mb-3">Open Tasks</h4>
+
+        <% if (tasks.length === 0) { %>
+            <div class="alert alert-info">No open tasks.</div>
+        <% } else { %>
+            <div class="list-group">
+                <% tasks.forEach(task => { %>
+                    <% if (!task.done) { %>
+                        <div class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"><%= task.title %></div>
+                                <small><%= task.description %></small><br>
+                                <% if (task.deadline) { %>
+                                    <small class="text-muted">Due: <%= task.deadline.toISOString().split('T')[0] %></small>
+                                <% } %>
+                            </div>
+                            <div class="btn-group">
+                                <form action="/tasks/<%= task.id %>/done" method="POST" class="me-1">
+                                    <button type="submit" class="btn btn-success btn-sm">Done</button>
+                                </form>
+                                <form action="/tasks/<%= task.id %>/delete" method="POST">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }); %>
+            </div>
+        <% } %>
+    </div>
+</main>
+</body>
+</html>
