@@ -10,9 +10,9 @@ html, body {
 }
 nav {
     padding: 2% 4%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.5);
 }
 ul {
     width: 10%;
@@ -35,10 +35,14 @@ main {
     width: 25%;
     min-width: 25%;
     max-width: 25%;
-    border: 1px solid grey;
+    border: 1px solid transparent;
     padding: 2%;
+    border-radius: 15px;
+    background-color: #ededed;
 }
-
+.highlighted {
+    background: orange;
+}
 #create-task-wrapper input {
     margin-top: 4%;
     width: 100%;
@@ -47,10 +51,59 @@ main {
 #create-task-wrapper textarea {
     margin-top: 4%;
 }
-#open-tasks-wrapper {
+.card {
     width: 70%;
     min-width: 70%;
     max-width: 70%;
     border: 1px solid grey;
+}
+.card-header {
+    background: orange; color: white; font-weight: bold; border-bottom: 1px solid transparent;
+}
+.list-group {
     padding: 2%;
+    background: black;
+}
+
+@media only screen and (max-width: 900px) {
+    nav {
+        text-align: center;
+    }
+    .card {
+        width: 65%;
+        min-width: 65%;
+        max-width: 65%;
+    }
+    #create-task-wrapper {
+        width: 30%;
+        min-width: 30%;
+        max-width: 30%;
+    }
+    #create-task-wrapper input {
+        margin-top: 2%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    nav {
+        text-align: center;
+    }
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+    .card {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        margin: 8% 0;
+    }
+    #create-task-wrapper {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+    }
+    #create-task-wrapper input {
+        margin-top: 2%;
+    }
 }
