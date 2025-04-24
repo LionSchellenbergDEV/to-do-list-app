@@ -9,7 +9,7 @@ This is a simple and intuitive to-do list web application that allows users to e
 ## Installation
 1.  **Download or Clone the Project:** Either download the project as a `.zip` file or copy it to your desired destination folder.
 
-2.  **Import the SQL File:** Import the included SQL file into your RDBMS (Relational Database Management System), such as MySQL Workbench.
+2.  **Import the SQL File:** Import the included SQL file ``` to_dos.sql ``` into your RDBMS (Relational Database Management System), such as MySQL Workbench.
 
 3.  **Configure Database Credentials:** Adjust the login details for your local RDBMS in the `app.js` file.
 

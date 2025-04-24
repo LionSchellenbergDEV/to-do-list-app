@@ -4,15 +4,15 @@ const app = express()
 const port = process.env.PORT || 3000
 const mysql = require('mysql2');
 
-// Verbindung konfigurieren
+//  Configure connection
 const db = mysql.createConnection({
     host: 'localhost',
-    user: 'root',       // oder dein Benutzername
-    password: 'w209.Kompressor',       // dein Passwort, evtl. leer
+    user: 'YOUR_USERNAME',
+    password: 'YOUR_PASSWOD',
     database: 'to_dos'
 });
 
-// Verbindung herstellen
+// Connect to database
 db.connect((err) => {
     if (err) {
         console.error('DB-Connection failed:', err);
@@ -32,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
 
+// Route to load main page
 app.get('/', function (req, res) {
     db.query('SELECT * FROM tasks', (err, result) => {
         if (err) {
@@ -41,6 +42,7 @@ app.get('/', function (req, res) {
     });
 });
 
+// Route to create the task
 app.post('/create-task', function (req, res) {
     const { title, description, deadline } = req.body;
     const currentDate = new Date();
@@ -58,7 +60,7 @@ app.post('/create-task', function (req, res) {
     }
 })
 
-// Route zum Löschen des Tasks
+//  Route to delete the task
 app.post('/delete-task/:id', (req, res) => {
     const taskId = req.params.id;
     db.query('DELETE FROM tasks WHERE id = ?;', [taskId], (err, result) => {
